@@ -38,8 +38,8 @@ variable "image" {
 variable "labels" {
   description = "descriptive labels for instances deployed"
   default = {
-    "name" : "Demo Compute Instance",
-    "owner" : "Andy Assareh",
+    "name" : "demo-compute-instance",
+    "owner" : "andy-assareh",
     "ttl" : "1",
   }
 }
