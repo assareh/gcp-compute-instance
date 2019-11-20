@@ -35,6 +35,15 @@ variable "image" {
   default     = "debian-cloud/debian-9"
 }
 
+variable "labels" {
+  description = "descriptive labels for instances deployed"
+  default = {
+    "name" : "Demo Compute Instance",
+    "owner" : "Andy Assareh",
+    "ttl" : "1",
+  }
+}
+
 provider "google" {
   credentials = var.gcp_credentials
   project     = var.gcp_project
@@ -45,6 +54,7 @@ resource "google_compute_instance" "demo" {
   name         = var.instance_name
   machine_type = var.machine_type
   zone         = var.gcp_zone
+  labels       = var.labels
 
   boot_disk {
     initialize_params {
