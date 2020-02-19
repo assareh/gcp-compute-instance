@@ -22,7 +22,7 @@ variable "gcp_zone" {
 
 variable "machine_type" {
   description = "GCP machine type"
-  default     = "g1-small"
+  default     = "f1-micro"
 }
 
 variable "instance_name" {
