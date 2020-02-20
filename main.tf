@@ -44,6 +44,10 @@ variable "labels" {
   }
 }
 
+variable "env" {
+  description = "git branch or environment"
+}
+
 provider "google" {
   credentials = var.gcp_credentials
   project     = var.gcp_project
@@ -51,7 +55,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "demo" {
-  name         = var.instance_name
+  name         = ${var.instance_name}-${var.env}
   machine_type = var.machine_type
   zone         = var.gcp_zone
   labels       = var.labels
