@@ -2,10 +2,6 @@ terraform {
   required_version = ">= 0.12"
 }
 
-variable "gcp_credentials" {
-  description = "GCP credentials needed by google provider"
-}
-
 variable "gcp_project" {
   description = "GCP project name"
 }
@@ -22,7 +18,7 @@ variable "gcp_zone" {
 
 variable "machine_type" {
   description = "GCP machine type"
-  default     = "n1-standard-2"
+  default     = "f1-micro"
 }
 
 variable "instance_name" {
@@ -44,14 +40,17 @@ variable "labels" {
   }
 }
 
+variable "env" {
+  description = "git branch or environment"
+}
+
 provider "google" {
-  credentials = var.gcp_credentials
   project     = var.gcp_project
   region      = var.gcp_region
 }
 
 resource "google_compute_instance" "demo" {
-  name         = var.instance_name
+  name         = format("%s-%s", var.instance_name, var.env)
   machine_type = var.machine_type
   zone         = var.gcp_zone
   labels       = var.labels
